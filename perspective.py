@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 
-
 image = cv2.imread('small.jpg')
 rows, cols, ch = image.shape
 
@@ -23,11 +22,10 @@ pt2 = np.float32(
 )
 
 retval=cv2.getPerspectiveTransform(pt1, pt2)
+print(retval)
 dst=cv2.warpPerspective(image, retval, (rows, cols))
 
-cv2.imshow("I/p", image)
 cv2.imshow("O/p", dst)
-
+cv2.imshow("I/p", image)
 cv2.waitKey(0)
-
 cv2.destroyAllWindows()

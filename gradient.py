@@ -2,12 +2,15 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-img = cv2.imread("avatar.jpg", cv2.IMREAD_GRAYSCALE)
+img = cv2.imread("human.jpg", cv2.IMREAD_GRAYSCALE)
 
 #Gradient Calculation
 
+# cv2.Laplacian(img, ddepth=6, dst=5, ksize=, scale=, delta=)
 lap1 = cv2.Laplacian(img, cv2.CV_64F, ksize=3)
+print(lap1)
 lap1 = np.uint8(np.absolute(lap1))
+print(lap1)
 sobelX = cv2.Sobel(img,cv2.CV_64F,1,0)
 sobelY = cv2.Sobel(img,cv2.CV_64F,0,1)
 sobelX = np.uint8(np.absolute(sobelX))

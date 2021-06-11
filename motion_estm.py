@@ -8,11 +8,12 @@ ret, frame1 = cap.read()
 ret, frame2 = cap.read()
 
 
-while cap.isOpened():
+while True:
     diff = cv.absdiff(frame1, frame2)
     gray = cv.cvtColor(diff, cv.COLOR_BGR2GRAY)
     blur = cv.GaussianBlur(gray, (5,5), 0)
     _, thres = cv.threshold(blur, 20, 255, cv.THRESH_BINARY)
+    print(_)
     dilated = cv.dilate(thres, None, iterations=3)
     contour, _ = cv.findContours(dilated, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 
@@ -37,8 +38,8 @@ while cap.isOpened():
 
     ret, frame2 = cap.read()
 
-    cv.waitKey(0)
+    if cv.waitKey(25) & 0xFF == ord('q'):
+        break
 
-
-cv.destroyAllWindows()
 cap.release()
+cv.destroyAllWindows()
